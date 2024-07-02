@@ -1,0 +1,116 @@
+﻿@model TechsysLog.Web.Models.AddOrderModel
+
+@{
+    ViewData["Title"] = "New Order";
+}
+<section class="section-conten padding-y container" style="min-height: 35vh">
+    @await Html.PartialAsync("WarningErrors")
+    <div class="card mx-auto" style="max-width: 380px; margin-top: 100px;">
+        <div class="card-body">
+            <h4 class="card-title mb-4">Welcome</h4>
+            <form asp-controller="Home" asp-action="New" method="post">
+                <div class="form-group">
+                    <label asp-for="Number"></label>
+                    <input asp-for="Number" id="number" class="form-control" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" id="description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Value"></label>
+                    <input asp-for="Value" id="value" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdateDate"></label>
+                    <input asp-for="UpdateDate" id="updateDate" class="form-control" />
+                    <span asp-validation-for="UpdateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <br />
+
+                    <label asp-for="Address.CEP"></label>
+                    <input asp-for="Address.CEP" id="cep" class="form-control" />
+                    <span asp-validation-for="Address.CEP" class="text-danger"></span>
+
+                    <label asp-for="Address.Street"></label>
+                    <input asp-for="Address.Street" id="street" class="form-control" />
+                    <span asp-validation-for="Address.Street" class="text-danger"></span>
+
+                    <label asp-for="Address.Number"></label>
+                    <input asp-for="Address.Number" id="number" class="form-control" />
+                    <span asp-validation-for="Address.Number" class="text-danger"></span>
+
+                    <label asp-for="Address.Neighborhood"></label>
+                    <input asp-for="Address.Neighborhood" id="neighborhood" class="form-control" />
+                    <span asp-validation-for="Address.Neighborhood" class="text-danger"></span>
+
+                    <label asp-for="Address.City"></label>
+                    <input asp-for="Address.City" id="city" class="form-control" />
+                    <span asp-validation-for="Address.City" class="text-danger"></span>
+
+                    <label asp-for="Address.State"></label>
+                    <input asp-for="Address.State" id="state" class="form-control" />
+                    <span asp-validation-for="Address.State" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="btnRegister" class="btn btn-primary btn-block">Register</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">Already have an account?<a asp-controller="Home" asp-action="Index"> Log in</a></div>
+    </div>
+
+</section>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script type="text/javascript">
+    "use strict";
+    window.NewOrder = {
+        events: function () {
+            $("#btnRegister").click(function () {
+                var data_send = {
+                    Number: $("#Number").val(),
+                    Description: $("#Description").val(),
+                    Value: $("#Value").val(),
+                    UpdateDate: $("#UpdateDate").val(),
+                    Address: {
+                        CEP: $("#CEP").val(),
+                        Rua: $("#Rua").val(),
+                        Numero: $("#Numero").val(),
+                        Bairro: $("#Bairro").val(),
+                        Cidade: $("#Cidade").val(),
+                        Estado: $("#Estado").val()
+                    }
+                };
+                $.ajax({
+                    url: "/NewOrder",
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify(data_send),
+                    async: true,
+                    success: function (response) {
+                        // handle success
+                        alert('Order registered successfully');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // handle error
+                        alert('Error registering order: ' + errorThrown);
+                    }
+                });
+            });
+        },
+        init: function () {
+            NewOrder.events();
+        }
+    };
+    $(document).ready(function () {
+        window.NewOrder.init();
+    });
+</script>

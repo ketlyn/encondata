@@ -1,0 +1,58 @@
+﻿@model TechsysLog.Web.Models.ListOrderModel
+
+@if (Model.aspNetUser.IsAuthenticated())
+{
+    <div class="container col-12">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Update Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var order in Model.orders.List.OrderBy(o => o.Number))
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.Number</td>
+                                <td>@order.Description</td>
+                                <td>@order.Value</td>
+                                <td>@order.UpdateDate</td>
+                                <td>
+                                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@order.Id" class="btn btn-danger">
+                                        <b>Delete</b>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <a asp-controller="Home" asp-action="New" class="btn btn-success"> New</a>
+            <a asp-controller="Home" asp-action="Logout" class="btn btn-danger"> Logout</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+}
+else
+{
+    <div class="container col-6">
+        <small class="title text-muted">You must be logged</small>
+    </div>
+}
+
+<script type="text/javascript">
+    "use strict";
+
+
+</script>

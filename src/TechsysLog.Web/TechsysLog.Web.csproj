@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>245a170c-8787-4b70-a9b4-de8544380ef2</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TechsysLog.Api\TechsysLog.Api.csproj" />
+    <ProjectReference Include="..\TechsysLog.Identity.Api\TechsysLog.Identity.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="img\" />
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+</Project>
